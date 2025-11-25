@@ -76,7 +76,7 @@ def main():
         logger.info("Executing scheduled job: Sending Daily Sales Report...")
         emailer = Emailer("smtp.example.com", 587, "bot@synfinii.com", "secret")
         # Mock sending email
-        emailer.send_email("jake@synfinii.com", "Daily Sales Report", f"Total Sales today: {format_currency(total_sales_usd)}")
+        emailer.send_email("jacob.samuel.white@gmail.com", "Daily Sales Report", f"Total Sales today: {format_currency(total_sales_usd)}")
     
     # Schedule it (Mock run)
     schedule_daily_report(job, "09:00")
