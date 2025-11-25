@@ -8,6 +8,10 @@ class Settings(BaseSettings):
     """
     # Database Settings
     SQL_SERVER_CONNECTION_STRING: Optional[str] = Field(None, env="SQL_SERVER_CONN_STR")
+    SQL_SERVER_HOST: Optional[str] = Field(None, env="SQL_SERVER_HOST")
+    SQL_SERVER_DB: Optional[str] = Field(None, env="SQL_SERVER_DB")
+    SQL_SERVER_TRUSTED_CONNECTION: bool = Field(False, env="SQL_SERVER_TRUSTED_CONNECTION")
+
     POSTGRES_CONNECTION_STRING: Optional[str] = Field(None, env="POSTGRES_CONN_STR")
     
     # Salesforce Settings

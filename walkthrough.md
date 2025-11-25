@@ -43,7 +43,14 @@ pip install -r requirements.txt
 Create a `.env` file in the root directory (`Modular-Programming/.env`) with your credentials:
 
 ```env
+# Option 1: Full Connection String
 SQL_SERVER_CONN_STR="mssql+pyodbc://user:pass@host/db?driver=ODBC+Driver+17+for+SQL+Server"
+
+# Option 2: Trusted Connection (Windows Auth)
+SQL_SERVER_HOST="localhost"
+SQL_SERVER_DB="MyDatabase"
+SQL_SERVER_TRUSTED_CONNECTION="True"
+
 POSTGRES_CONN_STR="postgresql+psycopg2://user:pass@host/db"
 SF_USERNAME="your_username"
 SF_PASSWORD="your_password"

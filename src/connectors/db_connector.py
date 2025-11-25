@@ -22,6 +22,22 @@ class SQLServerConnector(DatabaseConnector):
     """
     def __init__(self, connection_string: str = None):
         self.connection_string = connection_string or settings.SQL_SERVER_CONNECTION_STRING
+        
+        if not self.connection_string and settings.SQL_SERVER_HOST and settings.SQL_SERVER_DB:
+            driver = "ODBC+Driver+17+for+SQL+Server"
+            if settings.SQL_SERVER_TRUSTED_CONNECTION:
+                self.connection_string = (
+                    f"mssql+pyodbc://@{settings.SQL_SERVER_HOST}/{settings.SQL_SERVER_DB}"
+                    f"?driver={driver}&trusted_connection=yes"
+                )
+                logger.info("Constructed SQL Server connection string using Trusted Connection.")
+            else:
+                # Fallback to standard user/pass if provided in env, though usually they are in the full conn str
+                # But if we want to support building it:
+                # We would need SQL_SERVER_USER and SQL_SERVER_PASS in config too if we go down this route fully.
+                # For now, let's just support the Trusted Connection case as requested.
+                pass
+
         self.engine = None
 
     def connect(self):
