@@ -1,0 +1,8 @@
+pandas
+sqlalchemy
+pyodbc
+psycopg2-binary
+simple-salesforce
+python-dotenv
+pydantic
+pytest
