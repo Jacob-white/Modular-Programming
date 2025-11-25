@@ -5,6 +5,7 @@ psycopg2-binary
 simple-salesforce
 python-dotenv
 pydantic
+pydantic-settings
 pytest
 numpy
 schedule
