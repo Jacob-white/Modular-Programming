@@ -56,10 +56,16 @@ LOG_LEVEL="INFO"
 
 ## Usage
 
-See `main.py` for a complete example of how to use the library.
+See `main.py` for a basic example of how to use the library.
 
 ```bash
 python3 main.py
+```
+
+For a more comprehensive demonstration of advanced features (Geospatial, Product Analytics, Automation), run:
+
+```bash
+python3 advanced_demo.py
 ```
 
 ## Project Structure
