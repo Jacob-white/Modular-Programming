@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import os
 from src.core.logger import logger
 from src.processing.cleaner import clean_dataframe
@@ -10,27 +11,42 @@ from src.analytics.segmentation import segment_advisors_by_decile
 from src.analytics.goals import track_goals
 from src.enrichment.external_data import ExternalDataEnricher
 from src.reporting.html_generator import generate_html_report
+from src.utils.data_generator import generate_advisors, generate_sales_data, generate_territory_mapping
 
 def main():
     logger.info("Starting Asset Management Analytics Tool...")
 
     # 1. Mock Data Creation
+    # 1. Mock Data Creation
     logger.info("Generating mock data...")
-    sales_data = pd.DataFrame({
-        'AdvisorName': ['john doe', 'JANE SMITH', 'bob jones', 'alice wonderland', 'tom cruise'],
-        'ZipCode': ['12345', '67890-1234', '12345', '99999', '12345'],
-        'GrossSales': [100000, 250000, 50000, 75000, 500000],
-        'Redemptions': [10000, 50000, 5000, 0, 20000],
-        'SalesGoal': [150000, 300000, 100000, 100000, 600000],
-        'Email': ['john@example.com', 'jane.smith@firm.com', 'invalid-email', 'alice@wonderland.net', 'tom@topgun.com']
-    })
-
-    territory_map = pd.DataFrame({
-        'ZipCode': ['12345', '67890', '99999'],
-        'Territory': ['Northeast', 'Midwest', 'West'],
-        'Wholesaler': ['Mike Ross', 'Harvey Specter', 'Louis Litt']
-    })
     
+    # Generate Advisors
+    advisors_df = generate_advisors(num_advisors=50)
+    
+    # Generate Sales linked to Advisors
+    sales_transactions = generate_sales_data(advisors_df, num_records=500)
+    
+    # Aggregate sales for the main dataframe structure used previously
+    # We need to pivot or aggregate transactions to get GrossSales/Redemptions per advisor for the demo flow
+    sales_summary = sales_transactions.groupby(['AdvisorID', 'TransactionType'])['Amount'].sum().unstack(fill_value=0).reset_index()
+    if 'Purchase' not in sales_summary.columns: sales_summary['Purchase'] = 0
+    if 'Redemption' not in sales_summary.columns: sales_summary['Redemption'] = 0
+    
+    sales_summary.rename(columns={'Purchase': 'GrossSales', 'Redemption': 'Redemptions'}, inplace=True)
+    # Redemptions are negative in transaction table, but usually positive in summary columns (Net = Gross - Redemptions)
+    # The generator returns negative amounts for redemptions.
+    # So sum of 'Redemption' column will be negative.
+    # Let's make it positive for the column 'Redemptions'
+    sales_summary['Redemptions'] = sales_summary['Redemptions'].abs()
+    
+    # Merge back with Advisor info
+    sales_data = pd.merge(advisors_df, sales_summary, on='AdvisorID', how='left').fillna(0)
+    
+    # Add a mock Sales Goal
+    sales_data['SalesGoal'] = np.random.randint(100000, 1000000, len(sales_data))
+
+    # Generate Territory Map
+    territory_map = generate_territory_mapping()
     territory_map.to_csv('territory_map.csv', index=False)
 
     # 2. Data Cleaning

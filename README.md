@@ -24,6 +24,7 @@ A modular Python library designed for Business and Data Analytics in the Asset M
 - **Automation**: Email sending and task scheduling.
 - **Reporting**: Export to CSV, Excel, and HTML.
 - **Utilities**: Date calculations, currency conversion, and caching.
+- **Sample Data**: Built-in generator for realistic mock data (Advisors, Sales, Activities).
 
 ## Installation
 
