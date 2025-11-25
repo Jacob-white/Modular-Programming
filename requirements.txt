@@ -6,3 +6,6 @@ simple-salesforce
 python-dotenv
 pydantic
 pytest
+numpy
+schedule
+

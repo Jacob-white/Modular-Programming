@@ -17,7 +17,13 @@ A modular Python library designed for Business and Data Analytics in the Asset M
   - Territory assignment based on Zip Code mapping
   - Net Flows and Market Share calculations
   - Sales summarization by territory and advisor
-- **Reporting**: Export to CSV and Excel.
+  - **New**: Geospatial analysis (nearest wholesaler)
+  - **New**: Advisor segmentation (deciles, tiers)
+  - **New**: Goal tracking and product mix analysis
+- **Enrichment**: Mock external data integration.
+- **Automation**: Email sending and task scheduling.
+- **Reporting**: Export to CSV, Excel, and HTML.
+- **Utilities**: Date calculations, currency conversion, and caching.
 
 ## Installation
 

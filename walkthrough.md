@@ -24,9 +24,29 @@ I have implemented a modular Python library for your Asset Management Distributi
 - **Territory Management**: Logic to assign territories and wholesalers based on zip codes using a mapping file.
 - **Sales Analytics**: Functions to calculate Net Flows, Market Share, and summarize sales by territory.
 
-### 5. Reporting
+### 5. Advanced Analytics (New)
 
-- **Export**: Utilities to export DataFrames to CSV and Excel.
+- **Geospatial**: Haversine distance and nearest wholesaler logic.
+- **Segmentation**: Decile and tier-based segmentation.
+- **Goals**: Sales vs Target tracking.
+- **Product**: Product mix and asset class analysis.
+- **CRM Activity**: Activity summarization and correlation.
+
+### 6. Enrichment & Automation (New)
+
+- **Enrichment**: Mock external data interface.
+- **Emailer**: SMTP wrapper.
+- **Scheduler**: Simple task scheduler.
+
+### 7. Reporting
+
+- **Export**: Utilities to export DataFrames to CSV, Excel, and HTML.
+
+### 8. Utilities (New)
+
+- **Date**: Fiscal year and business day calculations.
+- **Currency**: Conversion utilities.
+- **Cache**: Simple in-memory caching.
 
 ## How to Use
 
