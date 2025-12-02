@@ -4,7 +4,7 @@ def summarize_activity_by_type(df: pd.DataFrame, type_col: str) -> pd.DataFrame:
     """
     Counts activities by type (Call, Meeting, Email).
     """
-    return df[type_col].value_counts().reset_index().rename(columns={'index': 'ActivityType', type_col: 'Count'})
+    return df[type_col].value_counts().reset_index(name='Count')
 
 def correlate_activity_sales(activity_df: pd.DataFrame, sales_df: pd.DataFrame, join_col: str, activity_count_col: str, sales_col: str) -> float:
     """

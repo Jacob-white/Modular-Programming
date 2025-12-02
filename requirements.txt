@@ -9,4 +9,7 @@ pydantic-settings
 pytest
 numpy
 schedule
+xlsxwriter
+matplotlib
+openpyxl
 

@@ -50,3 +50,12 @@ def get_previous_business_day(date_obj: date) -> date:
     Returns the previous business day.
     """
     return (pd.Timestamp(date_obj) - pd.tseries.offsets.BusinessDay(1)).date()
+
+def get_fiscal_year(date_obj: date, fiscal_year_start_month: int = 1) -> int:
+    return get_fiscal_year_and_quarter(date_obj, fiscal_year_start_month)[0]
+
+def get_fiscal_quarter(date_obj: date, fiscal_year_start_month: int = 1) -> int:
+    return get_fiscal_year_and_quarter(date_obj, fiscal_year_start_month)[1]
+
+def add_business_days(date_obj: date, days: int) -> date:
+    return (pd.Timestamp(date_obj) + pd.tseries.offsets.BusinessDay(days)).date()

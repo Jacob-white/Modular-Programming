@@ -20,9 +20,23 @@ def summarize_sales_by_territory(df: pd.DataFrame, territory_col: str, sales_col
     logger.info(f"Summarizing sales by {territory_col}")
     return df.groupby(territory_col)[sales_col].sum().reset_index().sort_values(by=sales_col, ascending=False)
 
-def identify_top_advisors(df: pd.DataFrame, advisor_name_col: str, sales_col: str, top_n: int = 10) -> pd.DataFrame:
+def identify_top_advisors(df: pd.DataFrame, advisor_id_col: str, sales_col: str, top_n: int = 10) -> pd.DataFrame:
     """
     Identifies top N advisors by sales.
     """
     logger.info(f"Identifying top {top_n} advisors")
-    return df.groupby(advisor_name_col)[sales_col].sum().reset_index().sort_values(by=sales_col, ascending=False).head(top_n)
+    return df.groupby(advisor_id_col)[sales_col].sum().reset_index().sort_values(by=sales_col, ascending=False).head(top_n)
+
+def summarize_sales_by_channel(df: pd.DataFrame, channel_col: str, sales_col: str) -> pd.DataFrame:
+    """
+    Aggregates sales by channel.
+    """
+    logger.info(f"Summarizing sales by {channel_col}")
+    return df.groupby(channel_col)[sales_col].sum().reset_index().sort_values(by=sales_col, ascending=False)
+
+def summarize_sales_by_firm_type(df: pd.DataFrame, firm_type_col: str, sales_col: str) -> pd.DataFrame:
+    """
+    Aggregates sales by firm type.
+    """
+    logger.info(f"Summarizing sales by {firm_type_col}")
+    return df.groupby(firm_type_col)[sales_col].sum().reset_index().sort_values(by=sales_col, ascending=False)

@@ -8,6 +8,12 @@ def calculate_percent_to_goal(actual: float, goal: float) -> float:
         return 0.0
     return (actual / goal) * 100
 
+def calculate_gap_to_goal(actual: float, goal: float) -> float:
+    """
+    Calculates gap to goal.
+    """
+    return goal - actual
+
 def track_goals(df: pd.DataFrame, actual_col: str, goal_col: str) -> pd.DataFrame:
     """
     Adds 'PercentToGoal' and 'GapToGoal' columns.

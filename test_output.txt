@@ -1,0 +1,67 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.0.1, pluggy-1.6.0
+rootdir: /home/jake/Documents/Modular-Programming
+configfile: pytest.ini
+collected 0 items / 1 error
+
+==================================== ERRORS ====================================
+_____________________ ERROR collecting tests/test_utils.py _____________________
+ImportError while importing test module '/home/jake/Documents/Modular-Programming/tests/test_utils.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_utils.py:6: in <module>
+    from src.processing.cleaner import clean_zip_code, validate_email, standardize_name
+E   ImportError: cannot import name 'standardize_name' from 'src.processing.cleaner' (/home/jake/Documents/Modular-Programming/src/processing/cleaner.py)
+=============================== warnings summary ===============================
+src/core/config.py:11
+  /home/jake/Documents/Modular-Programming/src/core/config.py:11: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    SQL_SERVER_CONNECTION_STRING: Optional[str] = Field(None, env="SQL_SERVER_CONN_STR")
+
+src/core/config.py:12
+  /home/jake/Documents/Modular-Programming/src/core/config.py:12: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    SQL_SERVER_HOST: Optional[str] = Field(None, env="SQL_SERVER_HOST")
+
+src/core/config.py:13
+  /home/jake/Documents/Modular-Programming/src/core/config.py:13: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    SQL_SERVER_DB: Optional[str] = Field(None, env="SQL_SERVER_DB")
+
+src/core/config.py:14
+  /home/jake/Documents/Modular-Programming/src/core/config.py:14: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    SQL_SERVER_TRUSTED_CONNECTION: bool = Field(False, env="SQL_SERVER_TRUSTED_CONNECTION")
+
+src/core/config.py:16
+  /home/jake/Documents/Modular-Programming/src/core/config.py:16: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    POSTGRES_CONNECTION_STRING: Optional[str] = Field(None, env="POSTGRES_CONN_STR")
+
+src/core/config.py:19
+  /home/jake/Documents/Modular-Programming/src/core/config.py:19: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    SF_USERNAME: Optional[str] = Field(None, env="SF_USERNAME")
+
+src/core/config.py:20
+  /home/jake/Documents/Modular-Programming/src/core/config.py:20: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    SF_PASSWORD: Optional[str] = Field(None, env="SF_PASSWORD")
+
+src/core/config.py:21
+  /home/jake/Documents/Modular-Programming/src/core/config.py:21: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    SF_TOKEN: Optional[str] = Field(None, env="SF_TOKEN")
+
+src/core/config.py:24
+  /home/jake/Documents/Modular-Programming/src/core/config.py:24: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    LOG_LEVEL: str = Field("INFO", env="LOG_LEVEL")
+
+src/core/config.py:25
+  /home/jake/Documents/Modular-Programming/src/core/config.py:25: PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'env'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    ENVIRONMENT: str = Field("development", env="APP_ENV")
+
+src/core/config.py:6
+  /home/jake/Documents/Modular-Programming/src/core/config.py:6: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+    class Settings(BaseSettings):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+ERROR tests/test_utils.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+======================== 11 warnings, 1 error in 0.28s =========================

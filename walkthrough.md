@@ -1,101 +1,106 @@
-# Walkthrough - Asset Management Distribution Analytics Tools
+# Asset Management Analytics Library Walkthrough
 
-I have implemented a modular Python library for your Asset Management Distribution analytics needs. This library provides a structured way to handle database connections, data cleaning, territory management, and sales reporting.
+This walkthrough demonstrates the capabilities of the modular analytics library, including data generation, advanced analytics, and automated reporting.
 
 ## Features Implemented
 
-### 1. Core Utilities
+1.  **Core Architecture**: Modular design with `core`, `connectors`, `processing`, `analytics`, `reporting`, `automation`, and `visualization` packages.
+2.  **Data Connectors**: Support for SQL Server (Trusted Auth), PostgreSQL, and Salesforce.
+3.  **Advanced Analytics**:
+    - **Geospatial**: Nearest wholesaler assignment using Haversine distance.
+    - **Segmentation**: Advisor tiering and decile analysis.
+    - **Product**: Product mix analysis.
+    - **CRM**: Activity correlation with sales.
+4.  **Robustness**:
+    - **Validation**: Pydantic-based schema validation for data integrity.
+    - **Visualization**: Static chart generation (Bar, Line).
+    - **Reporting**: Professional Excel reports with embedded charts.
+5.  **Automation**: Task scheduling and email notifications.
 
-- **Configuration**: Centralized settings management using `.env` files.
-- **Logging**: Standardized logging to console.
+## Phase 2: Deep Data Model Integration (Completed)
 
-### 2. Data Connectors
+The system now fully aligns with the provided SQL schema:
 
-- **SQL Server**: Connection wrapper using `sqlalchemy` and `pyodbc`.
-- **PostgreSQL**: Connection wrapper using `sqlalchemy` and `psycopg2`.
-- **Salesforce**: Wrapper around `simple-salesforce` for querying CRM data.
+- **Contact Entity**: Personal details (`FIRST_NAME`, `LAST_NAME`, `EMAIL`) are stored in a dedicated `Contact` model.
+- **Rep Profile**: Linked to `Contact` via `CONTACT_ID`. Includes rich attributes like `CHANNEL`, `SUB_CHANNEL`, and `TERR` codes.
+- **Transaction History**: Uses `CONTACT_ID` and includes `CUSIP`.
+- **Analytics**: Updated to leverage these new fields (e.g., sales by channel, firm type).
 
-### 3. Data Processing
+## Verification Results
 
-- **Cleaning**: Functions to standardize advisor names, clean zip codes (5-digit standard), and validate emails.
+### Automated Tests
 
-### 4. Analytics
+All 29 tests passed successfully, covering:
 
-- **Territory Management**: Logic to assign territories and wholesalers based on zip codes using a mapping file.
-- **Sales Analytics**: Functions to calculate Net Flows, Market Share, and summarize sales by territory.
+- Analytics modules (geospatial, goals, product, sales, territory, crm)
+- Connectors (SQL Server, Postgres, Salesforce)
+- Utilities (date, currency, cache)
+- Reporting (Excel generation)
+- New `Contact` and `RepProfile` schema validation.
+- Analytics using `CONTACT_ID`.
+- Sales summaries by Channel and Firm Type.
 
-### 5. Advanced Analytics (New)
+### Manual Verification
 
-- **Geospatial**: Haversine distance and nearest wholesaler logic.
-- **Segmentation**: Decile and tier-based segmentation.
-- **Goals**: Sales vs Target tracking.
-- **Product**: Product mix and asset class analysis.
-- **CRM Activity**: Activity summarization and correlation.
+The `advanced_demo.py` script ran successfully, demonstrating:
 
-### 6. Enrichment & Automation (New)
+1.  Data generation and validation against the new schema.
+2.  Geospatial analysis (nearest wholesaler).
+3.  Product mix analysis.
+4.  CRM activity analysis.
+5.  Excel report generation with charts.
+6.  Automated email scheduling (mocked).
+7.  Generation of `Contact`, `Firm`, `RepProfile`, and `TransactionHistory` data.
+8.  End-to-end analytics flow using the new schema.
+9.  Seamless integration with reporting and automation modules.
 
-- **Enrichment**: Mock external data interface.
-- **Emailer**: SMTP wrapper.
-- **Scheduler**: Simple task scheduler.
+### Next Steps
 
-### 7. Reporting
+- Deploy to a staging environment with real database connections.
+- Configure actual Salesforce credentials in `.env`.
+- Set up a cron job for the daily report script.
 
-- **Export**: Utilities to export DataFrames to CSV, Excel, and HTML.
+## Running the Advanced Demo
 
-### 8. Utilities (New)
+The `advanced_demo.py` script showcases the full workflow:
 
-- **Date**: Fiscal year and business day calculations.
-- **Currency**: Conversion utilities.
-- **Cache**: Simple in-memory caching.
-
-## How to Use
+1.  **Data Generation**: Creates realistic mock data for Advisors, Sales, and CRM Activities.
+2.  **Geospatial Analysis**: Assigns the nearest wholesaler to each advisor based on coordinates.
+3.  **Analytics**: Calculates product mix and correlates CRM activity with sales performance.
+4.  **Validation**: Checks data integrity using `DataValidator`.
+5.  **Reporting**: Generates `Advanced_Report.xlsx` containing summary tables and a sales chart.
+6.  **Automation**: Simulates sending the report via email.
 
 ### Prerequisites
 
-You need to install the required Python packages. Since `pip` was not available in the current environment, please run the following command in your terminal where `pip` is installed:
+Ensure you have the virtual environment set up:
 
 ```bash
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Configuration
+### Execution
 
-Create a `.env` file in the root directory (`Modular-Programming/.env`) with your credentials:
-
-```env
-# Option 1: Full Connection String
-SQL_SERVER_CONN_STR="mssql+pyodbc://user:pass@host/db?driver=ODBC+Driver+17+for+SQL+Server"
-
-# Option 2: Trusted Connection (Windows Auth)
-SQL_SERVER_HOST="localhost"
-SQL_SERVER_DB="MyDatabase"
-SQL_SERVER_TRUSTED_CONNECTION="True"
-
-POSTGRES_CONN_STR="postgresql+psycopg2://user:pass@host/db"
-SF_USERNAME="your_username"
-SF_PASSWORD="your_password"
-SF_TOKEN="your_security_token"
-LOG_LEVEL="INFO"
-```
-
-### Running the Example
-
-I have created a `main.py` script that demonstrates the end-to-end flow using mock data. You can run it to see the tools in action:
+Run the demo script:
 
 ```bash
-python3 main.py
+./venv/bin/python advanced_demo.py
 ```
 
-This script will:
+### Output
 
-1. Generate mock sales and territory data.
-2. Clean the data (standardize names, zip codes).
-3. Assign territories based on the mock mapping.
-4. Calculate net flows and summarize by territory.
-5. Export the enriched report to `enriched_sales_report.csv`.
+- **Console Logs**: Detailed logs of the analysis steps.
+- **Advanced_Report.xlsx**: A multi-sheet Excel report with:
+  - **Sales Summary**: Product mix data with an embedded bar chart.
+  - **Activity Summary**: Breakdown of CRM activities.
+  - **Advisors**: List of advisors with assigned wholesalers.
 
-## Next Steps
+## Testing
 
-- Integrate with your actual SQL Server / PostgreSQL databases by updating the `.env` file.
-- Expand the `TerritoryManager` to load mappings from a database instead of a CSV.
-- Add more complex analytics metrics as needed.
+The library includes a test suite using `pytest`.
+
+```bash
+./venv/bin/pytest tests/
+```

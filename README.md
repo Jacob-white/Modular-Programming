@@ -68,6 +68,15 @@ For a more comprehensive demonstration of advanced features (Geospatial, Product
 python3 advanced_demo.py
 ```
 
+## Testing
+
+To run the test suite, install the dependencies and run `pytest`:
+
+```bash
+pip install -r requirements.txt
+pytest tests/
+```
+
 ## Project Structure
 
 ```
